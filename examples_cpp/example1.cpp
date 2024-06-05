@@ -9,6 +9,9 @@ float l1 = 0.249926;
 float l2 = 0.2460244;
 double pi = 3.141592653589793238462643383279502884197;
 float max = l1+l2;
+
+
+
 std::pair<double,double> iksolver(std::pair<double,double> endpos){
     double gamma =  atan2(endpos.second,endpos.first);
     double beta = acos((pow(l1,2)+pow(l2,2)-pow(endpos.first,2)-pow(endpos.second,2))/(2*l1*l2));
