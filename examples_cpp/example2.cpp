@@ -83,7 +83,8 @@ MatrixXd jacobianUpdater(mab::Candle &candle){
             bottomleft[0],bottommid[0],bottomright[0],
             bottomleft[1],bottommid[1],bottomright[1],
             bottomleft[2],bottommid[2],bottomright[2];
-    std::cout<<J_6xN;
+    MatrixXd j = J_6xN *qdot;
+    std::cout<<J;
     return J_6xN;
 }
 
@@ -115,9 +116,9 @@ int main()
 	// called for data at any time
 	for (int i = 0; i < 1000; i++)
 	{
-        jacobianUpdater(candle);
+        MatrixXd j = jacobianUpdater(candle);
 
-		usleep(10000000);
+		usleep(1000000);
 	}
 
 	// Close the update loop
