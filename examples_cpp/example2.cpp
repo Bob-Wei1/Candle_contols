@@ -3,8 +3,8 @@
 #include <iostream>
 
 #include "candle.hpp"
-#include <eigen-3.4.0/Eigen/Eigen>
-#include <eigen-3.4.0/Eigen/Dense>
+#include <eigen3/Eigen/Eigen>
+#include <eigen3/Eigen/Dense>
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using Eigen::Vector3d;
@@ -18,8 +18,8 @@ MatrixXd jacobianUpdater(mab::Candle &candle){
 
     int theta = 0;
     double alpha = 1.5708;
-    double d = alpha;
-
+    double d = 0.1;
+    double r = 0;
     MatrixXd homgen_0_1(4,4);
     homgen_0_1 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),0,
                   sin(q[theta]),cos(q[theta])*cos(alpha),-cos(q[theta])*sin(alpha),0,
@@ -36,21 +36,25 @@ MatrixXd jacobianUpdater(mab::Candle &candle){
     theta = 1;
     alpha = 0;
     d = 0;
-    homgen_1_2 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),0,
-            sin(q[theta]),cos(q[theta])*cos(alpha),-cos(q[theta])*sin(alpha),0,
+    r = 0.2; //link 2
+    homgen_1_2 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),r*cos(q[theta]),
+            sin(q[theta]),cos(q[theta])*cos(alpha),-cos(q[theta])*sin(alpha),r*sin(q[theta]),
             0,sin(alpha),cos(alpha),d,
             0,0,0,1; //d1?
     MatrixXd rot_mat_1_2(3,3);
     rot_mat_1_2 << cos(q[theta]),-sin(q[theta]),0,
                     sin(q[theta]),cos(q[theta]),0,
                     0,0,1;
+
     theta = 2;
     d = 0;
+    r = 0.2; //link 3
     MatrixXd homgen_2_3(4,4);
-    homgen_2_3 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),0,
-            sin(q[theta]),cos(q[theta])*cos(alpha),-cos(q[theta])*sin(alpha),0,
+    homgen_2_3 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),r*cos(q[theta]),
+            sin(q[theta]),cos(q[theta])*cos(alpha),-cos(q[theta])*sin(alpha),r*sin(q[theta]),
             0,sin(alpha),cos(alpha),d,
             0,0,0,1; //d1?
+
     MatrixXd rot_mat_2_3(3,3);
     rot_mat_2_3 << cos(q[theta]),-sin(q[theta]),0,
                    sin(q[theta]),cos(q[theta]),0,
