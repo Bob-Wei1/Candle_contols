@@ -8,6 +8,10 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using Eigen::Vector3d;
+float l1 = 0.249926;
+float l2 = 0.273;
+double pi = 3.141592653589793238462643383279502884197;
+float max = l1+l2;
 
 MatrixXd jacobianUpdater(mab::Candle &candle){
     VectorXd q(3);
@@ -18,7 +22,7 @@ MatrixXd jacobianUpdater(mab::Candle &candle){
 
     int theta = 0;
     double alpha = 1.5708;
-    double d = 0.1;
+    double d = 0.06;
     double r = 0;
     MatrixXd homgen_0_1(4,4);
     homgen_0_1 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),0,
@@ -36,7 +40,7 @@ MatrixXd jacobianUpdater(mab::Candle &candle){
     theta = 1;
     alpha = 0;
     d = 0;
-    r = 0.2; //link 2
+    r = 0.249926; //link 2
     homgen_1_2 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),r*cos(q[theta]),
             sin(q[theta]),cos(q[theta])*cos(alpha),-cos(q[theta])*sin(alpha),r*sin(q[theta]),
             0,sin(alpha),cos(alpha),d,
@@ -48,7 +52,7 @@ MatrixXd jacobianUpdater(mab::Candle &candle){
 
     theta = 2;
     d = 0;
-    r = 0.2; //link 3
+    r = 0.273; //link 3
     MatrixXd homgen_2_3(4,4);
     homgen_2_3 << cos(q[theta]),-sin(q[theta])*cos(alpha),sin(q[theta])*sin(alpha),r*cos(q[theta]),
             sin(q[theta]),cos(q[theta])*cos(alpha),-cos(q[theta])*sin(alpha),r*sin(q[theta]),
@@ -91,7 +95,7 @@ MatrixXd jacobianUpdater(mab::Candle &candle){
             bottomleft[1],bottommid[1],bottomright[1],
             bottomleft[2],bottommid[2],bottomright[2];
     MatrixXd j = J_6xN *qdot;
-
+    //std::cout<<j<<'\n'<<'\n';
     return j;
 }
 
@@ -122,11 +126,17 @@ int main()
 	// Auto update loop is running in the background updating data in candle.md80s vector. Each md80 object can be
 	// called for data at any time
 
-	for (int i = 0; i < 100000; i++)
+    std::vector<double> current_xyz = {0,0,max};
+    MatrixXd j(6,1);
+    for (int i = 0; i < 100000; i++)
 	{
 
-        MatrixXd j = jacobianUpdater(candle);
+        j = jacobianUpdater(candle);
+        current_xyz[0] = current_xyz[0] + (j(0,0)*0.01);
+        current_xyz[1] = current_xyz[1] + (j(1,0)*0.01);
+        current_xyz [2] = current_xyz[2] + (j(2,0)*0.01);
 
+        std::cout<<current_xyz[0] <<" "<<current_xyz[1]<<" "<<current_xyz[2] <<'\n'<<'\n';
 		usleep(10000);
 	}
 

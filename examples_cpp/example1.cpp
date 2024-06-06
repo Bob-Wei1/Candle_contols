@@ -6,7 +6,7 @@
 #include <cmath>
 
 float l1 = 0.249926;
-float l2 = 0.2460244;
+float l2 = 0.273;
 double pi = 3.141592653589793238462643383279502884197;
 float max = l1+l2;
 
