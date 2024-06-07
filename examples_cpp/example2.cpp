@@ -12,7 +12,21 @@ float l1 = 0.249926;
 float l2 = 0.273;
 double pi = 3.141592653589793238462643383279502884197;
 float max = l1+l2;
+VectorXd twod_jacobianUpdater(mab::Candle &candle){
+    VectorXd q(2);
+    q<<candle.md80s[2].getPosition(),candle.md80s[1].getPosition();
 
+    VectorXd qdot(2);
+    qdot<<candle.md80s[2].getVelocity(),candle.md80s[1].getVelocity();
+    MatrixXd j(2,2);
+    double a4 = 0.273;
+    double a2 = 0.249926;
+    double theta1 = q[0];
+    double theta2 = q[1];
+    j<<(-a4*sin(theta1)*cos(theta2))-(a4*cos(theta1)*sin(theta2))-(a2*sin(theta1)),(-a4*sin(theta1)*cos(theta2))-(a4*cos(theta1)*sin(theta2)),
+            (a4*sin(theta1)*cos(theta2))-(a4*cos(theta1)*sin(theta2))+(a2*sin(theta1)),(a4*cos(theta1)*cos(theta2))-(a4*sin(theta1)*sin(theta2));
+    return j*qdot;
+}
 MatrixXd jacobianUpdater(mab::Candle &candle){
     VectorXd q(3);
     q<<candle.md80s[0].getPosition(),candle.md80s[2].getPosition(),candle.md80s[1].getPosition();
@@ -119,6 +133,9 @@ int main()
 	// Add all found to the update list
 	for (auto& id : ids)
 		candle.addMd80(id);
+    candle.controlMd80SetEncoderZero(ids[0]);
+    candle.controlMd80SetEncoderZero(ids[1]);
+    candle.controlMd80SetEncoderZero(ids[2]);
 
 	// Begin update loop (it starts in the background)
 	candle.begin();
@@ -126,17 +143,18 @@ int main()
 	// Auto update loop is running in the background updating data in candle.md80s vector. Each md80 object can be
 	// called for data at any time
 
-    std::vector<double> current_xyz = {0,0,max};
+    std::vector<double> current_xyz = {max,0};
     MatrixXd j(6,1);
     for (int i = 0; i < 100000; i++)
 	{
 
-        j = jacobianUpdater(candle);
-        current_xyz[0] = current_xyz[0] + (j(0,0)*0.01);
-        current_xyz[1] = current_xyz[1] + (j(1,0)*0.01);
-        current_xyz [2] = current_xyz[2] + (j(2,0)*0.01);
+        j = twod_jacobianUpdater(candle);
+        current_xyz[0] = current_xyz[0] + (j(0,0)*0.01);//y
+        current_xyz[1] = current_xyz[1] + (j(1,0)*0.01);//x
 
-        std::cout<<current_xyz[0] <<" "<<current_xyz[1]<<" "<<current_xyz[2] <<'\n'<<'\n';
+        //std::cout<<candle.md80s[1].getPosition()<<'\n';
+        //std::cout<<j(2,0)<<'\n';
+        std::cout<<current_xyz[1] <<" "<<current_xyz[0] <<'\n'<<'\n';
 		usleep(10000);
 	}
 
