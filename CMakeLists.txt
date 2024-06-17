@@ -30,7 +30,9 @@ if(CANDLE_BUILD_STATIC)
 else()
     set(CANDLE_BUILD_STATIC "FALSE")
     set(CANDLE_BUILD_SHARED "TRUE")
-    add_library(candle SHARED ${CANDLE_SOURCE})
+    add_library(candle SHARED ${CANDLE_SOURCE}
+            src/modern_robotics.cpp
+            include/modern_robotics.h)
 endif()
 
 message(STATUS "\nCANDLE_BUILD_SHARED: ${CANDLE_BUILD_SHARED}\nCANDLE_BUILD_STATIC: ${CANDLE_BUILD_STATIC}")
