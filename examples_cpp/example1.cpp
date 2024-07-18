@@ -35,11 +35,11 @@ std::pair<double,double> referenceTraj(double t){
     return currentpos;
 }
 void calibration(mab::Candle &candle, std::vector<unsigned short> &ids){
-    int hip = 2;
-    int knee = 1;
+    int hip = 1;
+    int knee = 2;
     candle.controlMd80Mode(ids[knee], mab::Md80Mode_E::VELOCITY_PID);	 // Set mode to impedance control
     candle.controlMd80Enable(ids[knee], true);						 // Enable the drive
-    candle.controlMd80Mode(ids[hip], mab::Md80Mode_E::VELOCITY_PID);	 // Set mode to impedance control
+    candle.controlMd80Mode(ids[hip], mab::Md80Mode_E::IDLE);	 // Set mode to impedance control
     candle.controlMd80Enable(ids[hip], true);						 // Enable the drive
 
 
@@ -120,14 +120,14 @@ int main()
     //calibration(candle,ids);
 
 
-    candle.controlMd80Mode(ids[0], mab::Md80Mode_E::IMPEDANCE);
-    candle.controlMd80Mode(ids[1], mab::Md80Mode_E::IMPEDANCE);	 // Set mode to impedance control
+    candle.controlMd80Mode(ids[1], mab::Md80Mode_E::IMPEDANCE);
+    candle.controlMd80Mode(ids[2], mab::Md80Mode_E::IMPEDANCE);	 // Set mode to impedance control
     //candle.controlMd80Mode(ids[2], mab::Md80Mode_E::IMPEDANCE);
-    candle.controlMd80Enable(ids[0], true);
     candle.controlMd80Enable(ids[1], true);
+    candle.controlMd80Enable(ids[2], true);
     //candle.controlMd80Enable(ids[2], true);
-    candle.controlMd80SetEncoderZero(ids[0]);
     candle.controlMd80SetEncoderZero(ids[1]);
+    candle.controlMd80SetEncoderZero(ids[2]);
     //candle.controlMd80SetEncoderZero(ids[2]);
     candle.begin();
 
@@ -145,8 +145,8 @@ int main()
     }*/
     std::pair<float,float> commandpos = iksolver({max-0.1,-0.05});
 
-    candle.md80s[2].setTargetPosition(-1*commandpos.first);  //hip motor
-    candle.md80s[1].setTargetPosition(commandpos.second*1.375); //knee motor
+    candle.md80s[1].setTargetPosition(-1*commandpos.first);  //hip motor
+    candle.md80s[2].setTargetPosition(commandpos.second*1.375); //knee motor
     usleep(1000);
 
     for (int i = 0; i < 10; i++)
@@ -159,9 +159,9 @@ int main()
             std::pair<float, float> reference = {max -0.1-(0.15* sin((2*pi*j)/20000)),-0.2+(j*0.35/10000)};
             commandpos = iksolver(reference);
             candle.md80s[1].setTargetPosition(-1 * commandpos.first);  //hip motor
-            candle.md80s[0].setTargetPosition(commandpos.second * 1.375); //knee motor
+            candle.md80s[2].setTargetPosition(commandpos.second * 1.375); //knee motor
             //std::cout <<"commandpos:" <<commandpos.first<< " "<<commandpos.second << '\n'<<'\n';
-            usleep(2);    // Add some delay
+            usleep(50);    // Add some delay
         }
 
 
@@ -171,8 +171,8 @@ int main()
             commandpos = iksolver(reference);
 
             candle.md80s[1].setTargetPosition(-1*commandpos.first);  //hip motor
-            candle.md80s[0].setTargetPosition(commandpos.second*1.375); //knee motor
-            usleep(1);
+            candle.md80s[2].setTargetPosition(commandpos.second*1.375); //knee motor
+            usleep(50);
         }
     }
 

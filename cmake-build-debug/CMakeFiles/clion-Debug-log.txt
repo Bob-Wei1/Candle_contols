@@ -1,0 +1,7 @@
+/home/bob/Downloads/CLion-2024.1.2/clion-2024.1.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/bob/Downloads/CLion-2024.1.2/clion-2024.1.2/bin/ninja/linux/x64/ninja -G Ninja -S /home/bob/CLionProjects/Candle_contols -B /home/bob/CLionProjects/Candle_contols/cmake-build-debug
+-- 
+CANDLE_BUILD_SHARED: TRUE
+CANDLE_BUILD_STATIC: FALSE
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/bob/CLionProjects/Candle_contols/cmake-build-debug

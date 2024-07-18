@@ -36,7 +36,7 @@ int main()
 	// Begin update loop (it starts in the background)
 	candle.begin();
 
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 50000; i++)
 	{
 		// Once again we loop over all drives, this time setting thier position target. All drives should now perform
 		// a nice synchronized movement.

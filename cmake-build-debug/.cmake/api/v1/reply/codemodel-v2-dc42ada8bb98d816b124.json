@@ -1,0 +1,195 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "candle_lib",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "candle::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-candle-Release-98c1cc1abc7d0676b6a4.json",
+					"name" : "candle",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example1-Release-5817bc340f791b1271b1.json",
+					"name" : "example1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example10::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example10-Release-ddcded2aedab6f1fef27.json",
+					"name" : "example10",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example11::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example11-Release-da02d9d8bce8840cb8d2.json",
+					"name" : "example11",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example12::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example12-Release-77530adfd81403da4768.json",
+					"name" : "example12",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example13::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example13-Release-0b15be30b79a65310b29.json",
+					"name" : "example13",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example14::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example14-Release-f9d73f4bd04f43b7fb89.json",
+					"name" : "example14",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example15::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example15-Release-10571e6f4373bd68b160.json",
+					"name" : "example15",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example2-Release-bd956ffd9a1e2e7dfc5c.json",
+					"name" : "example2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example3-Release-5bdcd40b680c3d0bc6b6.json",
+					"name" : "example3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example4::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example4-Release-2d4b404b85af2a674bc6.json",
+					"name" : "example4",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example5::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example5-Release-f6a2400b226ae7ee7c45.json",
+					"name" : "example5",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example6::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example6-Release-e3e47f2e0ca7ac29df79.json",
+					"name" : "example6",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example7::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example7-Release-c5bc72c63d164ca28c48.json",
+					"name" : "example7",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example8::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example8-Release-331a83489b711037df1f.json",
+					"name" : "example8",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "example9::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-example9-Release-38aeedffe4b2186dd969.json",
+					"name" : "example9",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/bob/CLionProjects/Candle_contols/cmake-build-debug",
+		"source" : "/home/bob/CLionProjects/Candle_contols"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
